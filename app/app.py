@@ -85,5 +85,5 @@ if uploaded_file is not None and model is not None:
 
 else:
     # default state
-    st.image('https://www.eikojones.com/wp-content/uploads/2023/06/that-wanaka-tree-in-autumn.jpg', caption='Example Landscape', width='stretch')
+    # st.image('https://www.eikojones.com/wp-content/uploads/2023/06/that-wanaka-tree-in-autumn.jpg', caption='Example Landscape', width='stretch')
     st.info('Upload an image to begin.')
