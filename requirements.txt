@@ -1,0 +1,8 @@
+streamlit
+torch
+torchvision
+streamlit-image-comparison
+Pillow
+scikit-image
+numpy
+PIL
