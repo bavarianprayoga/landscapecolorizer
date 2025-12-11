@@ -23,7 +23,7 @@ The core architecture is a U-Net variant, characterized by a contracting path (E
 
 Encoder (ResNet-18 Backbone): Instead of training a feature extractor from scratch, we utilize a pre-trained ResNet-18 (weights from ImageNet). We truncate the classification head to extract deep latent representations.
 
-Decoder (Upsampling): A custom array of ConvTranspose2d layers that progressively upscale the latent features back to the original resolution (512×512).
+Decoder (Upsampling): A mirrored upsampling + Conv2d that restores the image to 512×512 resolution.
 
 ### 3. Skip Connections
 A critical component of the U-Net design is the use of Skip Connections.
@@ -45,15 +45,16 @@ https://www.kaggle.com/datasets/arnaud58/landscape-pictures
 - landscapes island (500 pictures)
 - landscapes japan (900 pictures)
 
-Preprocessing: Images were resized to 512×512.
+Preprocessing: 
+- Images were resized to 512×512.
 
-Augmentation: 
+Augmentations: 
 - Random horizontal & vertical flips
 - Random 15 degrees rotation
 - Added color jitter
 - Random resize crop
 
-The dataset is not grouped into classes and only contains images so there's not much EDA or preprocessing to do apart resizing the image to 512x512
+The dataset is not grouped into classes and only contains images so there's not much EDA or preprocessing to do apart from resizing the image to 512x512
 
 ## **Installation & Usage**
 
@@ -62,9 +63,11 @@ The dataset is not grouped into classes and only contains images so there's not 
 
 ### Setup
 - Clone the repo:
+
 ```git clone https://github.com/bavarianprayoga/landscapecolorizer```
 
 - Install dependencies:
+
 ```pip install -r requirements.txt```
 
 ### Running the App 
@@ -75,6 +78,6 @@ Make sure you're on the root folder (not inside landscapecolorizer/app) then run
 ## **Limitations & Known Issues**
 
 ### Context Dependency:
-The model has a strong dependency on global context cues, specifically the presence of a sky. When an image contains a clear sky (blue top / green bottom), colorization is vibrant and accurate.In zoomed-in images or scenes without a visible sky (e.g., dense forest close-ups), the model often reverts to desaturated "sepia" tones. This suggests the model relies on the sky as a positional anchor to trigger its "landscape" color palette.
+The model has a strong dependency on global context cues, specifically the presence of a sky. When an image contains a clear sky (blue top / green bottom), colorization is vibrant and accurate. In zoomed-in images or scenes without a visible sky (e.g., dense forest close-ups), the model often reverts to desaturated "sepia" tones. This suggests the model relies on the sky as a positional anchor to trigger its "landscape" color palette.
 
 ![Output example](/outputs/plots/example_comparison_weakness.jpeg)
