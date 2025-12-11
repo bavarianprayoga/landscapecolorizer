@@ -1,7 +1,7 @@
 # **Landscape Colorizer**
 A deep learning-based image colorization tool capable to colorize grayscale landscape images. Utilizing a ResNet-18 U-Net architecture, the model uses transfer learning to understand the image structure (trees, sky, mountains) and applies a regression approach to predict the a and b chrominance channels in the CIE Lab color space
 
-![Output example](outputs\plots\example_comparison.jpeg)
+![Output example](/outputs/plots/example_comparison.jpeg)
 
 Special thanks to mberkay0 for the idea
 
@@ -77,4 +77,4 @@ Make sure you're on the root folder (not inside landscapecolorizer/app) then run
 ### Context Dependency:
 The model has a strong dependency on global context cues, specifically the presence of a sky. When an image contains a clear sky (blue top / green bottom), colorization is vibrant and accurate.In zoomed-in images or scenes without a visible sky (e.g., dense forest close-ups), the model often reverts to desaturated "sepia" tones. This suggests the model relies on the sky as a positional anchor to trigger its "landscape" color palette.
 
-![Output example](outputs\plots\example_comparison_weakness.jpeg)
+![Output example](/outputs/plots/example_comparison_weakness.jpeg)
