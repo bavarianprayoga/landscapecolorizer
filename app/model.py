@@ -75,6 +75,6 @@ class ResNetColorizer(nn.Module):
         d4 = torch.cat([d4, e0], dim=1)
         d4 = self.conv4(d4) # 256
 
-        out = self.final(d4)
+        out = self.final(d4) # 64 features to 2 (a and b)
         out = F.interpolate(out, size=x.shape[2:], mode='bilinear', align_corners=True) # stretch to 512
         return out
